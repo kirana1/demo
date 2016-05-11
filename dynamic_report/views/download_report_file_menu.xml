@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    
+   		<record id="action_download_record" model="ir.actions.server">
+            <field name="name">Report Download</field>
+            <field name="model_id" ref="model_dynamic_xls_report"/>
+            <field name="state">code</field>
+            <field name="code">action = self.download_report(cr, uid, context.get('active_ids', []), context )</field>
+        </record>
+
+        <record model="ir.values" id="download_record">
+            <field name="name">Report Download</field>
+            <field name="model" eval="'dynamic.xls.report'" />
+            <field name="key" >action</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.server,%d'%action_download_record" />
+            <field name="object" eval="True" />
+			<!--<field name="groups_id" eval="True">base.group_hr_manager</field>-->
+        </record>
+        
+          <report 
+            string="Download Report" 
+            id="report_to_download"  
+            model="dynamic.xls.report" 
+            report_type="qweb-pdf"
+            name="dynamic_report.report_download_document"   
+            file="dynamic_report.report_download_document"
+        />
+        
+        	
+	    
+        
+        
+    
+	 <!--act_window id="action_download_record" 
+	    multi="True"
+	    key2="client_action_multi" 
+	 	name="Report Download"
+	    res_model="dynamic.xls.report" 
+	 	src_model="dynamic.xls.report" 
+	    view_mode="form" 
+	 	target="new" 
+	 	view_type="form"
+	    view_id="wizard_dynamic_xls_report" 
+	 	
+	/--> 
+    
+    </data>
+</openerp>
